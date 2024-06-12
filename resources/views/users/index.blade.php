@@ -39,14 +39,17 @@
                     <td><a href="{{ route('users.detail', $user->id) }}" class="btn btn-outline-success"
                             rel="User Detail">Details
                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-success"
-                                rel="Edit User">Edit
-                                <a href="{{ route('users.delete', $user->id) }}" class="btn btn-outline-danger"
-                                    rel="Delete User">Delete</td>
+                                rel="Edit User">Edit</a>
+                            <form action="{{ route('users.delete', $user->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-outline-danger" rel="Delete User">Delete</button>
+                            </form>
+                    </td>
                 </tr>
             @endforeach
         </table>
 
-    <!-- Pagination links -->
-    {{ $users->links() }}
+        <!-- Pagination links -->
+        {{ $users->links() }}
     </div>
 @endsection

@@ -12,7 +12,7 @@ Route::prefix('users')->controller(UserController::class)->name('users.')->group
     Route::post('store', 'store')->name('store');
     Route::get('detail/{id}', 'show')->name('detail');
     Route::get('index', 'index')->name('index');
-    Route::get('delete/{id}', 'destroy')->name('delete');
+    Route::post('delete/{id}', 'destroy')->name('delete');
     Route::get('edit/{id}', 'edit')->name('edit');
     Route::post('update', 'update')->name('update');
 });
