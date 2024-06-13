@@ -20,11 +20,40 @@
             <span><a href="{{ route('users.index') }}" rel="users" class="header-nav-home">Users</a></span>
             <span><a href="#" rel="create" class="header-nav-home">Create</a></span>
         </span>
-        <span>
-            <span><a href="#" class="btn btn-outline-primary">Logout</a></span>
-            <span><a href="#" class="btn btn-outline-primary">Login</a></span>
-            <span><a href="{{ route('users.create') }}" class="btn btn-outline-primary">Register</a></span>
-        </span>
+        @if (Auth::check())
+            <div class="d-inline-block">
+                <span>{{ Auth::user()->name }}</span>
+                <div class="dropdown d-inline-block">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="{{ route('logout') }}">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="d-inline-block">
+                <span>Unknown</span>
+                <div class="dropdown d-inline-block">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="{{ route('loginScreen') }}">
+                            Login
+                        </a>
+                        <a class="dropdown-item" href="{{ route('users.create') }}">
+                            Register
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="container content">
         @yield('content')
@@ -35,6 +64,9 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('js/common.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
