@@ -39,5 +39,5 @@ Route::prefix('posts')->controller(PostController::class)->name('posts.')->group
     Route::get('edit/{id}', 'edit')->name('edit');
     Route::post('edit', 'update')->name('update');
     Route::get('{id}', 'show')->name('show');
-    Route::get('delete/{id}', 'destroy')->name('delete');
+    Route::post('delete/{id}', 'destroy')->name('delete');
 });

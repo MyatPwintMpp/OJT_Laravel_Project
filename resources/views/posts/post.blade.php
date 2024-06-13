@@ -20,7 +20,10 @@
             <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3">Back</a>
             @if (auth()->check() && $post->user_id == auth()->user()->id)
                 <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary mt-3">Edit</a>
-                <a href="{{ route('posts.delete', $post->id) }}" class="btn btn-danger mt-3">Delete</a>
+                <form action="{{ route('posts.delete', $post->id) }}" method="POST">
+                    @csrf
+                    <button class="btn btn-danger mt-3" rel="Delete Post">Delete</button>
+                </form>
             @endif
 
         </div>
