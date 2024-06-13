@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
 
         //Auth
         $this->app->bind('App\Contracts\Services\AuthServiceInterface', 'App\Services\AuthService');
+
+        //Post
+        $this->app->bind('App\Contracts\Services\PostServiceInterface', 'App\Services\PostService');
+        $this->app->bind('App\Contracts\Dao\PostDaoInterface', 'App\Dao\PostDao');
     }
 
     /**
