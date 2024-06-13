@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,13 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::prefix('posts')->controller(PostController::class)->name('posts.')->group(function () {
+    Route::get('index', 'index')->name('index');
+    Route::get('create', 'create')->name('create');
+    Route::post('create', 'store')->name('store');
+    Route::get('edit/{id}', 'edit')->name('edit');
+    Route::post('edit', 'update')->name('update');
+    Route::get('{id}', 'show')->name('show');
+    Route::post('delete/{id}', 'destroy')->name('delete');
+});

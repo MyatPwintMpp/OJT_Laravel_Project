@@ -16,9 +16,9 @@
 <body>
     <div class="header container">
         <span>
-            <span><a href="#" rel="home" class="header-nav-home">Home</a></span>
+            <span><a href="{{ route('posts.index') }}" rel="home" class="header-nav-home">Home</a></span>
             <span><a href="{{ route('users.index') }}" rel="users" class="header-nav-home">Users</a></span>
-            <span><a href="#" rel="create" class="header-nav-home">Create</a></span>
+            <span><a href="{{ route('posts.create') }}" rel="create" class="header-nav-home">Create</a></span>
         </span>
         @if (Auth::check())
             <div class="d-inline-block">
