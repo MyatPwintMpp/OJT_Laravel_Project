@@ -55,7 +55,7 @@
             <div class="form-group p-2">
                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                 <a href="{{ route('users.index') }}" class="btn btn-secondary btn-lg">Back</a>
-                <a href="#" class="btn btn-outline-primary btn-lg">Change Password</a>
+                <a href="{{ route('changePasswordScreen',$user->id ) }}" class="btn btn-outline-primary btn-lg">Change Password</a>
             </div>
         </form>
     </div>
