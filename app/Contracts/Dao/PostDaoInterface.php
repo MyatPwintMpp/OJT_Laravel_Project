@@ -12,4 +12,5 @@ interface PostDaoInterface
     public function getPostById(int $postId);
     public function update(array $updateData, int $postId);
     public function delete(int $id);
+    public function verifyPostExists(Request $request);
 }
