@@ -29,6 +29,9 @@
                         <i class="fas fa-caret-down"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="{{ route('users.detail', Auth::user()->id) }}">
+                            Profile
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}">
                             Logout
                         </a>

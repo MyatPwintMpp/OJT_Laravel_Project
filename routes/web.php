@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\Role;
+use App\Http\Middleware\VerifyPostExists;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,9 +16,9 @@ Route::prefix('users')->controller(UserController::class)->name('users.')->group
     Route::post('store', 'store')->name('store');
     Route::get('detail/{id}', 'show')->name('detail');
     Route::get('index', 'index')->name('index');
-    Route::post('delete/{id}', 'destroy')->name('delete');
-    Route::get('edit/{id}', 'edit')->name('edit');
-    Route::post('update', 'update')->name('update');
+    Route::post('delete/{id}', 'destroy')->name('delete')->middleware([Role::class]);
+    Route::get('edit/{id}', 'edit')->name('edit')->middleware([Role::class]);
+    Route::post('update', 'update')->name('update')->middleware([Role::class]);
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -36,8 +38,8 @@ Route::prefix('posts')->controller(PostController::class)->name('posts.')->group
     Route::get('index', 'index')->name('index');
     Route::get('create', 'create')->name('create');
     Route::post('create', 'store')->name('store');
-    Route::get('edit/{id}', 'edit')->name('edit');
-    Route::post('edit', 'update')->name('update');
-    Route::get('{id}', 'show')->name('show');
-    Route::post('delete/{id}', 'destroy')->name('delete');
+    Route::get('edit/{id}', 'edit')->name('edit')->middleware([Role::class]);
+    Route::post('edit', 'update')->name('update')->middleware([Role::class]);
+    Route::get('{id}', 'show')->name('show')->middleware([VerifyPostExists::class]);
+    Route::post('delete/{id}', 'destroy')->name('delete')->middleware([Role::class]);
 });

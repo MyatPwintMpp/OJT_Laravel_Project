@@ -96,4 +96,15 @@ class PostDao implements PostDaoInterface
         return $posts;
     }
 
+    /**
+     * Check if post exists
+     *
+     * @param Request $request
+     * @return boolean
+     */
+    public function verifyPostExists(Request $request): bool
+    {
+        return Post::findOrFail($request->id) ? true : false;
+    }
+
 }
