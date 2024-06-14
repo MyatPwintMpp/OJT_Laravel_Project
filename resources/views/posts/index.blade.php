@@ -5,8 +5,9 @@
         @if (Session::has('error'))
             <div class="alert alert-danger">{{ Session::get('error') }}</div>
         @elseif(Session::has('success'))
-            <div class="alet alert-success">{{ Session::get('success') }}</div>
+            <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif
+
         @if (count($errors) > 0)
             @foreach ($errors->all() as $error)
                 <p class="alert alert-warning">{{ $error }}</p>
@@ -21,6 +22,17 @@
                 <h6>Description</h6>
                 <p>{{ $post->description }}</p>
                 <h8>Post Created By : {{ $post->user->name }}</h8><br />
+                <div>
+                    @if (count($post->comments))
+                        <br>
+                        <div>Comments : </div>
+                        @foreach ($post->comments->take(1) as $comment)
+                            <div>{{ $comment->user->name }}</div>
+                            <div class="border border-dark-subtle rounded-4 p-2 mb-2">{{ $comment->comment }}</div>
+                        @endforeach
+                    @endif
+
+                </div>
                 <a href="{{ route('posts.show', $post->id) }}" rel="show post" class="btn btn-outline-primary mt-3">More</a>
             </div>
         @endforeach

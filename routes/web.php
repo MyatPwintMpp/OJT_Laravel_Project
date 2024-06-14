@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Role;
@@ -42,4 +43,11 @@ Route::prefix('posts')->controller(PostController::class)->name('posts.')->group
     Route::post('edit', 'update')->name('update')->middleware([Role::class]);
     Route::get('{id}', 'show')->name('show')->middleware([VerifyPostExists::class]);
     Route::post('delete/{id}', 'destroy')->name('delete')->middleware([Role::class]);
+});
+
+Route::controller(CommentController::class)->group(function () {
+    Route::post('posts/comments', 'store')->name('comment.store');
+    Route::post('comments/delete/{id}', 'destroy')->name('comments.delete');
+    Route::get('comments/edit/{id}', 'edit')->name('comments.edit');
+    Route::post('comments/update', 'update')->name('comments.update');
 });
