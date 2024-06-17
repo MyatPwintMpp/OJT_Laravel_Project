@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\Admin;
 use App\Http\Middleware\Role;
 use App\Http\Middleware\VerifyPostExists;
 use Illuminate\Support\Facades\Route;
@@ -50,4 +52,12 @@ Route::controller(CommentController::class)->group(function () {
     Route::post('comments/delete/{id}', 'destroy')->name('comments.delete');
     Route::get('comments/edit/{id}', 'edit')->name('comments.edit');
     Route::post('comments/update', 'update')->name('comments.update');
+});
+
+Route::prefix('admin')->controller(AdminController::class)->name('admin.')->group(function () {
+    Route::get('file/csv', 'csvShow')->middleware(Admin::class)->name('file.csv.show');
+    Route::get('file/csv/userTableDownload', 'userCsvDownload')->middleware(Admin::class)->name('file.csv.users.download');
+    Route::post('file/csv/userCsvUpload', 'userCsvUpload')->name('file.csv.users.upload');
+    Route::get('file/csv/postTableDownload', 'postCsvDownload')->middleware(Admin::class)->name('file.csv.posts.download');
+    Route::post('file/csv/postCsvUpload', 'postCsvUpload')->name('file.csv.posts.upload');
 });

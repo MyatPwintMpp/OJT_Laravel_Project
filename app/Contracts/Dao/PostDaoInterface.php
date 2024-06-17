@@ -13,4 +13,5 @@ interface PostDaoInterface
     public function update(array $updateData, int $postId);
     public function delete(int $id);
     public function verifyPostExists(Request $request);
+    public function csvImport(CsvUploadRequest $request);
 }

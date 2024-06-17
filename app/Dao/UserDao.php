@@ -2,6 +2,8 @@
 namespace App\Dao;
 
 use App\Contracts\Dao\UserDaoInterface;
+use App\Http\Requests\CsvUserUploadRequest;
+use App\Imports\UsersImport;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -117,4 +119,26 @@ class UserDao implements UserDaoInterface
             }
         );
     }
+
+    /**
+     * Import csv file
+     *
+     * @param CsvUserUploadRequest $request
+     * @return boolean
+     */
+    public function csvImport(CsvUserUploadRequest $request): bool
+    {
+        DB::beginTransaction();
+        $import = new UsersImport();
+        $import->import($request->file('users_csv'));
+        $failures = $import->failures();
+        if (count($failures) > 0) {
+            DB::rollBack();
+            return false;
+        } else {
+            DB::commit();
+            return true;
+        }
+    }
+
 }

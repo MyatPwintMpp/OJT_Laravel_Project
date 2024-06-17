@@ -2,6 +2,7 @@
 namespace App\Contracts\Dao;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CsvUserUploadRequest;
 
 interface UserDaoInterface
 {
@@ -12,4 +13,5 @@ interface UserDaoInterface
     public function getAllUser();
     public function storeChangedPassword(string $password, int $id);
     public function storeResetPassword(Request $request);
+    public function csvImport(CsvUserUploadRequest $request);
 }
