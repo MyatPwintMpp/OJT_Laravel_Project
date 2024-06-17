@@ -32,6 +32,14 @@
                         <a class="dropdown-item" href="{{ route('users.detail', Auth::user()->id) }}">
                             Profile
                         </a>
+                        @if (Auth::user()->role==1)
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" rel="file upload download"
+                                href="{{ route('admin.file.csv.show') }}">
+                                Csv download/upload
+                            </a>
+                        @endif
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}">
                             Logout
                         </a>
@@ -50,6 +58,7 @@
                         <a class="dropdown-item" href="{{ route('loginScreen') }}">
                             Login
                         </a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('users.create') }}">
                             Register
                         </a>
